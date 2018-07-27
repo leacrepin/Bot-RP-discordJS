@@ -106,20 +106,7 @@ client.on('message', async message => {
         }
         else if (command === 'sell') {
     
-            const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
-            if (!item) return message.channel.send('That item doesn\'t exist.');
-    
-            const user = await Users.findOne({ where: { user_id: message.author.id } });
-            currency.add(message.author.id, -item.cost);
-            await user.addItem(item);
-            const tagName = commandArgs;
-
-            // equivalent to: UPDATE tags (descrption) values (?) WHERE name='?';
-const affectedRows = await UserItems.update({ amount: tagDescription }, { where: { name: tagName } });
-if (affectedRows > 0) {
-    return message.reply(`Tag ${tagName} was edited.`);
-}
-return message.reply(`Could not find a tag with name ${tagName}.`);
+            return;
     
         }
         else if (command === 'shop') {
